@@ -28,11 +28,14 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Gradle
+      - name: Set up Gradle cache
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Check Android SDK tools
+        run: |
+          command -v sdkmanager
+          test -n "$ANDROID_HOME"
+          echo "ANDROID_HOME=$ANDROID_HOME"
 
       - name: Install Android SDK packages
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
@@ -48,7 +51,7 @@ jobs:
           printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$CI_KEYSTORE_PATH"
 
       - name: Build release APK
-        run: gradle :app:assembleRelease
+        run: gradle --build-cache :app:assembleRelease
 
       - name: Rename release APK
         run: |

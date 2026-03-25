@@ -3,6 +3,7 @@ package com.example.armoredage.ui
 import android.content.ClipData
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,7 +35,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.PrimaryTabRow
@@ -54,6 +54,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.res.stringResource
@@ -601,34 +602,53 @@ private fun KeysSection(
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Text(label, style = MaterialTheme.typography.titleMedium)
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            FilterChip(
-                                selected = state.selectedIdentity == label,
-                                onClick = { onSelect(label) },
-                                label = {
-                                    Text(
-                                        if (state.selectedIdentity == label) {
-                                            stringResource(R.string.action_selected)
-                                        } else {
-                                            stringResource(R.string.action_select)
-                                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            if (state.selectedIdentity == label) {
+                                Box(modifier = Modifier.padding(start = 12.dp)) {
+                                    FilterChip(
+                                        selected = true,
+                                        onClick = {},
+                                        label = { Text(stringResource(R.string.action_selected)) }
                                     )
                                 }
-                            )
+                            }
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            OutlinedButton(
+                                onClick = { onSelect(label) },
+                                enabled = state.selectedIdentity != label
+                            ) {
+                                Text(stringResource(R.string.action_select))
+                            }
                             OutlinedButton(onClick = { onRename(label) }) {
                                 Text(stringResource(R.string.action_rename))
                             }
-                            OutlinedButton(onClick = { onCopyPublicKey(label) }) {
-                                Text(stringResource(R.string.action_copy_public))
+                            TextButton(onClick = { onDelete(label) }) {
+                                Text(stringResource(R.string.action_delete))
                             }
                         }
-                        OutlinedButton(onClick = { onCopyPrivateKey(label) }) {
-                            Text(stringResource(R.string.action_copy_private))
+                        OutlinedButton(
+                            onClick = { onCopyPublicKey(label) },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(stringResource(R.string.action_copy_public))
                         }
-                        HorizontalDivider()
-                        TextButton(onClick = { onDelete(label) }) {
-                            Text(stringResource(R.string.action_delete_identity))
+                        OutlinedButton(
+                            onClick = { onCopyPrivateKey(label) },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(stringResource(R.string.action_copy_private))
                         }
                     }
                 }
