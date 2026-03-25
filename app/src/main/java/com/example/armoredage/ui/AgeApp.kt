@@ -159,6 +159,7 @@ fun AgeApp(context: Context) {
                 state = state,
                 onNameChange = vm::updateRecipientName,
                 onPubkeyChange = vm::updateRecipientPubkey,
+                onPastePubkey = { pasteFromClipboard(vm::updateRecipientPubkey) },
                 onSave = vm::saveRecipient,
                 onSelect = vm::selectRecipient,
                 onRename = { label ->
@@ -443,6 +444,7 @@ private fun RecipientsSection(
     state: AgeUiState,
     onNameChange: (String) -> Unit,
     onPubkeyChange: (String) -> Unit,
+    onPastePubkey: () -> Unit,
     onSave: () -> Unit,
     onSelect: (String) -> Unit,
     onRename: (String) -> Unit,
@@ -481,6 +483,9 @@ private fun RecipientsSection(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    OutlinedButton(onClick = onPastePubkey) {
+                        Text(stringResource(R.string.action_paste))
+                    }
                     Button(
                         onClick = onSave,
                         enabled = state.recipientNameInput.isNotBlank() && state.recipientPubkeyInput.isNotBlank()

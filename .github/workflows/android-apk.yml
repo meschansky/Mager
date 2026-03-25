@@ -12,11 +12,12 @@ jobs:
   build-apk:
     runs-on: ubuntu-latest
     env:
+      RELEASE_TAG: ${{ github.ref_name }}
       CI_SIGNING: "true"
       CI_KEYSTORE_PATH: ${{ github.workspace }}/ci-release.jks
-      CI_KEYSTORE_PASSWORD: android
-      CI_KEY_ALIAS: ci
-      CI_KEY_PASSWORD: android
+      CI_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      CI_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      CI_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,18 +37,15 @@ jobs:
       - name: Install Android SDK packages
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
-      - name: Generate self-signed keystore
+      - name: Decode release keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: |
-          keytool -genkeypair \
-            -storetype JKS \
-            -keystore "$CI_KEYSTORE_PATH" \
-            -alias "$CI_KEY_ALIAS" \
-            -keyalg RSA \
-            -keysize 2048 \
-            -validity 10000 \
-            -storepass "$CI_KEYSTORE_PASSWORD" \
-            -keypass "$CI_KEY_PASSWORD" \
-            -dname "CN=CI,O=ArmoredAge,C=US"
+          test -n "$ANDROID_KEYSTORE_BASE64"
+          test -n "$CI_KEYSTORE_PASSWORD"
+          test -n "$CI_KEY_ALIAS"
+          test -n "$CI_KEY_PASSWORD"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$CI_KEYSTORE_PATH"
 
       - name: Build release APK
         run: gradle :app:assembleRelease

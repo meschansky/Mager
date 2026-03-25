@@ -8,7 +8,7 @@ Mobile app for **encrypting/decrypting ASCII-armored AGE messages** with local k
 - Stores known recipient public keys for encryption.
 - Encrypts plaintext to armored AGE payloads.
 - Decrypts only armored AGE payloads.
-- GitHub Actions CI builds a self-signed release APK artifact.
+- GitHub Actions CI builds a signed release APK artifact from version tags.
 
 ## Notes
 
@@ -18,11 +18,25 @@ Mobile app for **encrypting/decrypting ASCII-armored AGE messages** with local k
 ## Build locally
 
 ```bash
-gradle :app:assembleDebug
+make debug
+make release
 ```
 
 ## CI APK
 
 Workflow: `.github/workflows/android-apk.yml`
 
-Each run generates a temporary self-signed keystore and builds `:app:assembleRelease`, then uploads the APK artifact.
+Tagged builds use the Git tag to set app version metadata. For example, `v1.0.5` becomes:
+
+- `versionName = 1.0.5`
+- `versionCode = 1000005`
+- release asset `armored-age-v1.0.5.apk`
+
+To allow in-place upgrades on Android, CI must use one persistent signing key. Configure these GitHub Actions secrets:
+
+- `ANDROID_KEYSTORE_BASE64`
+- `ANDROID_KEYSTORE_PASSWORD`
+- `ANDROID_KEY_ALIAS`
+- `ANDROID_KEY_PASSWORD`
+
+`ANDROID_KEYSTORE_BASE64` should contain the base64-encoded bytes of your release keystore. Every tagged release must use that same keystore, otherwise Android will reject upgrades over an installed build.

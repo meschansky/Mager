@@ -6,6 +6,32 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+data class ReleaseVersion(
+    val versionCode: Int,
+    val versionName: String
+)
+
+fun releaseVersionFromTag(tag: String?): ReleaseVersion {
+    val match = Regex("""^v(\d+)\.(\d+)\.(\d+)$""").matchEntire(tag.orEmpty())
+        ?: return ReleaseVersion(versionCode = 1, versionName = "0.0.0-dev")
+
+    val (major, minor, patch) = match.destructured
+    val majorInt = major.toInt()
+    val minorInt = minor.toInt()
+    val patchInt = patch.toInt()
+
+    return ReleaseVersion(
+        versionCode = (majorInt * 1_000_000) + (minorInt * 1_000) + patchInt,
+        versionName = "$majorInt.$minorInt.$patchInt"
+    )
+}
+
+val releaseVersion = releaseVersionFromTag(
+    providers.environmentVariable("RELEASE_TAG")
+        .orElse(providers.environmentVariable("GITHUB_REF_NAME"))
+        .orNull
+)
+
 android {
     namespace = "com.example.armoredage"
     compileSdk = 36
@@ -14,8 +40,8 @@ android {
         applicationId = "com.example.armoredage"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = releaseVersion.versionCode
+        versionName = releaseVersion.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
