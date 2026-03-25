@@ -2,8 +2,8 @@ name: Build signed APK
 
 on:
   push:
-    branches: ["**"]
-  pull_request:
+    tags:
+      - "*"
 
 jobs:
   build-apk:
@@ -29,6 +29,9 @@ jobs:
 
       - name: Install Gradle
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
       - name: Generate self-signed keystore
         run: |

@@ -3,6 +3,7 @@ package com.example.armoredage.data
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import kage.crypto.x25519.X25519Identity
 
 class KeyManager(context: Context) {
 
@@ -15,7 +16,9 @@ class KeyManager(context: Context) {
     )
 
     fun generateAndStoreIdentity(label: String): Pair<String, String> {
-        val (publicKey, privateKey) = generateKeyPair()
+        val identity = X25519Identity.new()
+        val publicKey = identity.recipient().encodeToString()
+        val privateKey = identity.encodeToString()
         prefs.edit()
             .putString("id_priv_$label", privateKey)
             .putString("id_pub_$label", publicKey)
@@ -32,19 +35,4 @@ class KeyManager(context: Context) {
             .filter { it.startsWith("id_priv_") }
             .map { it.removePrefix("id_priv_") }
             .sorted()
-
-    private fun generateKeyPair(): Pair<String, String> {
-        try {
-            val clazz = Class.forName("at.asitplus.kage.age.Age")
-            val method = clazz.methods.first { it.name == "generateX25519Identity" }
-            val identity = method.invoke(null)
-            val getPrivate = identity.javaClass.methods.first { it.name.contains("private", true) }
-            val getPublic = identity.javaClass.methods.first { it.name.contains("public", true) }
-            return getPublic.invoke(identity).toString() to getPrivate.invoke(identity).toString()
-        } catch (_: Exception) {
-            // Fallback for development without exact kage API binding.
-            val suffix = System.currentTimeMillis().toString(16)
-            return "age1placeholder$suffix" to "AGE-SECRET-KEY-placeholder$suffix"
-        }
-    }
 }

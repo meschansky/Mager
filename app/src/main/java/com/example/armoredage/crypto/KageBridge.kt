@@ -1,45 +1,33 @@
 package com.example.armoredage.crypto
 
-import java.lang.reflect.Method
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import kage.Age
+import kage.crypto.x25519.X25519Identity
+import kage.crypto.x25519.X25519Recipient
 
-/**
- * Thin reflection-based adapter so app compiles even if kage API names evolve.
- */
 class KageBridge {
 
     fun encryptArmored(plainText: String, recipientPublicKey: String): String {
-        try {
-            // Expected in current kage API:
-            // at.asitplus.kage.age.Age.encryptArmored(plain: String, recipients: List<String>)
-            val clazz = Class.forName("at.asitplus.kage.age.Age")
-            val method: Method = clazz.methods.first {
-                it.name == "encryptArmored" && it.parameterTypes.size == 2
-            }
-            val result = method.invoke(null, plainText, listOf(recipientPublicKey))
-            return result.toString()
-        } catch (ex: Exception) {
-            throw IllegalStateException(
-                "kage encryptArmored invocation failed. Verify the kage version/API.",
-                ex
-            )
-        }
+        val input = ByteArrayInputStream(plainText.toByteArray(Charsets.UTF_8))
+        val output = ByteArrayOutputStream()
+        Age.encryptStream(
+            recipients = listOf(X25519Recipient.decode(recipientPublicKey)),
+            inputStream = input,
+            outputStream = output,
+            generateArmor = true
+        )
+        return output.toString(Charsets.UTF_8.name())
     }
 
     fun decryptArmored(armoredPayload: String, privateKey: String): String {
-        try {
-            // Expected in current kage API:
-            // at.asitplus.kage.age.Age.decryptArmored(armored: String, identities: List<String>)
-            val clazz = Class.forName("at.asitplus.kage.age.Age")
-            val method: Method = clazz.methods.first {
-                it.name == "decryptArmored" && it.parameterTypes.size == 2
-            }
-            val result = method.invoke(null, armoredPayload, listOf(privateKey))
-            return result.toString()
-        } catch (ex: Exception) {
-            throw IllegalStateException(
-                "kage decryptArmored invocation failed. Verify the kage version/API.",
-                ex
-            )
-        }
+        val input = ByteArrayInputStream(armoredPayload.toByteArray(Charsets.UTF_8))
+        val output = ByteArrayOutputStream()
+        Age.decryptStream(
+            identities = listOf(X25519Identity.decode(privateKey)),
+            srcStream = input,
+            dstStream = output
+        )
+        return output.toString(Charsets.UTF_8.name())
     }
 }
