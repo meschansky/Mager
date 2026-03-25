@@ -482,9 +482,12 @@ private fun RecipientsSection(
                     minLines = 3,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
                     OutlinedButton(onClick = onPastePubkey) {
-                        Text(stringResource(R.string.action_paste))
+                        Text(stringResource(R.string.action_paste_public_key))
                     }
                     Button(
                         onClick = onSave,
@@ -907,7 +910,7 @@ private fun ImportIdentityDialog(
                 OutlinedTextField(
                     value = label,
                     onValueChange = onLabelChange,
-                    label = { Text(stringResource(R.string.label_identity)) },
+                    label = { Text(stringResource(R.string.label_name)) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 OutlinedTextField(

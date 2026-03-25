@@ -6,13 +6,15 @@ KEYSTORE_PATH ?= armored-age-release.jks
 KEY_ALIAS ?= armored-age
 STORE_PASSWORD ?=
 KEY_PASSWORD ?=
+ICON_SOURCE ?= ../armorage-t.png
+ANDROID_RES_DIR ?= app/src/main/res
 
 export JAVA_HOME
 export ANDROID_HOME
 export ANDROID_SDK_ROOT
 export PATH := $(JAVA_HOME)/bin:$(ANDROID_HOME)/cmdline-tools/latest/bin:$(ANDROID_HOME)/platform-tools:$(PATH)
 
-.PHONY: help sdk debug release lint test clean build-debug build-release build-local-debug build-local-release signing-secrets
+.PHONY: help sdk debug release lint test clean build-debug build-release build-local-debug build-local-release signing-secrets generate-icons
 
 help:
 	@printf "Targets:\n"
@@ -23,6 +25,7 @@ help:
 	@printf "  make build-release       Alias for make release\n"
 	@printf "  make build-local-debug   Build debug APK with repo macOS defaults\n"
 	@printf "  make build-local-release Build release APK with repo macOS defaults\n"
+	@printf "  make generate-icons      Generate Android launcher icons from $(ICON_SOURCE)\n"
 	@printf "  make signing-secrets STORE_PASSWORD=... KEY_PASSWORD=... [KEYSTORE_PATH=armored-age-release.jks] [KEY_ALIAS=armored-age]\n"
 	@printf "  make lint     Run Android lint\n"
 	@printf "  make test     Run unit tests\n"
@@ -44,6 +47,21 @@ build-release: release
 build-local-debug: debug
 
 build-local-release: release
+
+generate-icons:
+	@test -f "$(ICON_SOURCE)" || (printf "ICON_SOURCE not found: %s\n" "$(ICON_SOURCE)" >&2; exit 1)
+	@mkdir -p "$(ANDROID_RES_DIR)/mipmap-mdpi" "$(ANDROID_RES_DIR)/mipmap-hdpi" "$(ANDROID_RES_DIR)/mipmap-xhdpi" "$(ANDROID_RES_DIR)/mipmap-xxhdpi" "$(ANDROID_RES_DIR)/mipmap-xxxhdpi"
+	@sips -s format png -z 48 48 "$(ICON_SOURCE)" --out "$(ANDROID_RES_DIR)/mipmap-mdpi/ic_launcher.png" >/dev/null
+	@sips -s format png -z 72 72 "$(ICON_SOURCE)" --out "$(ANDROID_RES_DIR)/mipmap-hdpi/ic_launcher.png" >/dev/null
+	@sips -s format png -z 96 96 "$(ICON_SOURCE)" --out "$(ANDROID_RES_DIR)/mipmap-xhdpi/ic_launcher.png" >/dev/null
+	@sips -s format png -z 144 144 "$(ICON_SOURCE)" --out "$(ANDROID_RES_DIR)/mipmap-xxhdpi/ic_launcher.png" >/dev/null
+	@sips -s format png -z 192 192 "$(ICON_SOURCE)" --out "$(ANDROID_RES_DIR)/mipmap-xxxhdpi/ic_launcher.png" >/dev/null
+	@cp "$(ANDROID_RES_DIR)/mipmap-mdpi/ic_launcher.png" "$(ANDROID_RES_DIR)/mipmap-mdpi/ic_launcher_round.png"
+	@cp "$(ANDROID_RES_DIR)/mipmap-hdpi/ic_launcher.png" "$(ANDROID_RES_DIR)/mipmap-hdpi/ic_launcher_round.png"
+	@cp "$(ANDROID_RES_DIR)/mipmap-xhdpi/ic_launcher.png" "$(ANDROID_RES_DIR)/mipmap-xhdpi/ic_launcher_round.png"
+	@cp "$(ANDROID_RES_DIR)/mipmap-xxhdpi/ic_launcher.png" "$(ANDROID_RES_DIR)/mipmap-xxhdpi/ic_launcher_round.png"
+	@cp "$(ANDROID_RES_DIR)/mipmap-xxxhdpi/ic_launcher.png" "$(ANDROID_RES_DIR)/mipmap-xxxhdpi/ic_launcher_round.png"
+	@printf "Generated launcher icons in %s\n" "$(ANDROID_RES_DIR)"
 
 signing-secrets:
 	@test -n "$(STORE_PASSWORD)" || (printf "STORE_PASSWORD is required\n" >&2; exit 1)

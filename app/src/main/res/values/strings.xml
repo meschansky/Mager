@@ -23,6 +23,7 @@
     <string name="placeholder_select_identity">Select an identity</string>
     <string name="label_plaintext">Plaintext</string>
     <string name="label_armored_payload">Armored AGE payload</string>
+    <string name="label_name">Name</string>
     <string name="label_recipient_alias">Recipient alias</string>
     <string name="label_age_public_key">AGE public key</string>
     <string name="hint_age_public_key">Expected format: age1...</string>
@@ -32,6 +33,7 @@
     <string name="action_decrypt">Decrypt</string>
     <string name="action_clear">Clear</string>
     <string name="action_paste">Paste</string>
+    <string name="action_paste_public_key">Paste public key</string>
     <string name="action_copy">Copy</string>
     <string name="action_copy_result">Copy result</string>
     <string name="action_copy_public">Copy public</string>
@@ -94,8 +96,8 @@
     <string name="error_unknown">Unknown error</string>
     <string name="error_recipient_name_required">Recipient name is required.</string>
     <string name="error_recipient_duplicate">Recipient alias already exists.</string>
-    <string name="error_identity_label_required">Identity label is required.</string>
-    <string name="error_identity_duplicate">Identity label already exists.</string>
+    <string name="error_identity_label_required">Identity name is required.</string>
+    <string name="error_identity_duplicate">Identity name already exists.</string>
     <string name="error_invalid_private_key">Invalid AGE private key.</string>
     <string name="error_invalid_public_key">Recipient must be a valid AGE public key.</string>
     <string name="error_select_recipient">Select a known recipient for encryption.</string>
