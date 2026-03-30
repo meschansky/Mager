@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArmoredAge</string>
+    <string name="app_tagline">加密、解密并管理 AGE 身份</string>
+
+    <string name="nav_main">主页</string>
+    <string name="nav_recipients">接收者</string>
+    <string name="nav_my_keys">我的密钥</string>
+    <string name="nav_settings">设置</string>
+
+    <string name="main_eyebrow">主页</string>
+    <string name="main_title">编码和解码带装甲的 AGE 载荷</string>
+    <string name="main_body">一次专注一个流程，并让结果保持易于复制。</string>
+    <string name="main_mode_encrypt">加密</string>
+    <string name="main_mode_decrypt">解密</string>
+    <string name="main_encrypt_title">加密</string>
+    <string name="main_encrypt_body">选择一个已保存的接收者，将明文转换为带装甲的 AGE 输出。</string>
+    <string name="main_decrypt_title">解密</string>
+    <string name="main_decrypt_body">使用你保存的身份之一来解码带装甲的 AGE 载荷。</string>
+
+    <string name="label_recipient">接收者</string>
+    <string name="placeholder_select_recipient">选择接收者</string>
+    <string name="label_identity">身份</string>
+    <string name="placeholder_select_identity">选择身份</string>
+    <string name="label_plaintext">明文</string>
+    <string name="label_armored_payload">带装甲的 AGE 载荷</string>
+    <string name="label_name">名称</string>
+    <string name="label_recipient_alias">接收者别名</string>
+    <string name="label_age_public_key">AGE 公钥</string>
+    <string name="hint_age_public_key">预期格式：age1...</string>
+    <string name="label_private_key">AGE 私钥</string>
+    <string name="label_app_language">应用语言</string>
+
+    <string name="language_system_default">跟随系统</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_chinese_simplified">简体中文</string>
+
+    <string name="action_encrypt">加密</string>
+    <string name="action_decrypt">解密</string>
+    <string name="action_clear">清除</string>
+    <string name="action_paste">粘贴</string>
+    <string name="action_paste_public_key">粘贴公钥</string>
+    <string name="action_copy">复制</string>
+    <string name="action_copy_result">复制结果</string>
+    <string name="action_copy_public">复制公钥</string>
+    <string name="action_copy_private">复制私钥</string>
+    <string name="action_save_recipient">保存接收者</string>
+    <string name="action_generate_identity">生成身份</string>
+    <string name="action_import_private_key">导入私钥</string>
+    <string name="action_select">选择</string>
+    <string name="action_selected">已选中</string>
+    <string name="action_rename">重命名</string>
+    <string name="action_delete">删除</string>
+    <string name="action_delete_identity">删除身份</string>
+    <string name="action_open_recipients">打开接收者</string>
+    <string name="action_open_my_keys">打开我的密钥</string>
+    <string name="action_save">保存</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_back">返回</string>
+    <string name="action_show_license">显示许可证</string>
+    <string name="action_show_less">收起</string>
+    <string name="action_view_open_source_licenses">查看开源许可证</string>
+
+    <string name="result_title">结果</string>
+    <string name="result_hint">执行加密或解密操作后，输出会显示在这里。</string>
+    <string name="result_output_label">输出</string>
+
+    <string name="recipients_eyebrow">接收者</string>
+    <string name="recipients_title">管理你的加密对象</string>
+    <string name="recipients_body">将可信接收者密钥保存一次，即可在主流程中快速选择。</string>
+    <string name="recipients_add_title">添加接收者</string>
+    <string name="recipients_add_body">保存接收者别名和 AGE 公钥以便复用。</string>
+    <string name="empty_recipients_title">还没有接收者</string>
+    <string name="empty_recipients_body">添加接收者后即可启用加密。</string>
+
+    <string name="my_keys_eyebrow">我的密钥</string>
+    <string name="my_keys_title">管理本地身份</string>
+    <string name="my_keys_body">生成保存在设备上的 AGE 身份，选择当前身份，并在需要时复制密钥。</string>
+    <string name="my_keys_create_title">创建身份</string>
+    <string name="my_keys_create_body">生成一个新的 X25519 身份并安全地保存在设备上。</string>
+    <string name="empty_identities_title">还没有身份</string>
+    <string name="empty_identities_body">生成或导入身份后即可在此设备上解密消息。</string>
+
+    <string name="settings_eyebrow">设置</string>
+    <string name="settings_title">应用设置与法律信息</string>
+    <string name="settings_body">选择应用语言，并查看应用及第三方组件的许可证信息。</string>
+    <string name="settings_language_title">语言</string>
+    <string name="settings_language_body">无需更改设备语言即可覆盖应用语言。</string>
+    <string name="settings_about_title">关于</string>
+    <string name="settings_about_body">ArmoredAge 是一个本地优先的 AGE 工具，用于装甲加密、解密和密钥管理。</string>
+    <string name="settings_about_version">版本 %1$s</string>
+    <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
+    <string name="settings_about_license_label">MIT License</string>
+    <string name="settings_about_license_body">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies.</string>
+    <string name="settings_open_source_title">开源软件</string>
+    <string name="settings_open_source_body">查看应用中包含的第三方库许可证。</string>
+    <string name="settings_open_source_menu_title">开源许可证</string>
+
+    <string name="dialog_delete_recipient_title">删除接收者？</string>
+    <string name="dialog_delete_recipient_body">要从已保存的接收者中移除“%1$s”吗？</string>
+    <string name="dialog_delete_identity_title">删除身份？</string>
+    <string name="dialog_delete_identity_body">要从此设备中删除“%1$s”及其存储的密钥吗？</string>
+    <string name="dialog_copy_private_key_title">复制私钥？</string>
+    <string name="dialog_copy_private_key_body">私钥可用于解密访问。要将“%1$s”复制到剪贴板吗？</string>
+    <string name="dialog_rename_recipient_title">重命名接收者</string>
+    <string name="dialog_rename_identity_title">重命名身份</string>
+    <string name="dialog_import_private_key_title">导入私钥</string>
+
+    <string name="notice_result_copied">结果已复制</string>
+    <string name="notice_public_key_copied">公钥已复制</string>
+    <string name="notice_private_key_copied">私钥已复制</string>
+    <string name="notice_clipboard_empty">剪贴板为空。</string>
+    <string name="notice_identity_generated">已生成身份“%1$s”。</string>
+    <string name="notice_recipient_saved">已保存接收者“%1$s”。</string>
+    <string name="notice_recipient_deleted">已删除接收者“%1$s”。</string>
+    <string name="notice_recipient_renamed">已将接收者“%1$s”重命名为“%2$s”。</string>
+    <string name="notice_identity_deleted">已删除身份“%1$s”。</string>
+    <string name="notice_identity_renamed">已将身份“%1$s”重命名为“%2$s”。</string>
+    <string name="notice_identity_imported">已导入身份“%1$s”。</string>
+
+    <string name="error_unknown">未知错误</string>
+    <string name="error_recipient_name_required">接收者名称为必填项。</string>
+    <string name="error_recipient_duplicate">接收者别名已存在。</string>
+    <string name="error_identity_label_required">身份名称为必填项。</string>
+    <string name="error_identity_duplicate">身份名称已存在。</string>
+    <string name="error_invalid_private_key">无效的 AGE 私钥。</string>
+    <string name="error_invalid_public_key">接收者必须是有效的 AGE 公钥。</string>
+    <string name="error_select_recipient">请选择一个已知接收者进行加密。</string>
+    <string name="error_identity_missing">未找到身份。请先生成或导入一个。</string>
+    <string name="error_invalid_armored_payload">仅允许带装甲的 AGE 载荷。</string>
+    <string name="main_no_recipients_title">加密需要接收者</string>
+    <string name="main_no_recipients_body">请先添加一个已保存的接收者，然后再回来加密。</string>
+    <string name="main_no_identities_title">解密需要你的一个身份</string>
+    <string name="main_no_identities_body">请先生成或导入一个身份，然后再回来解密。</string>
+</resources>

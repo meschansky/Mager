@@ -2,6 +2,7 @@ package com.example.armoredage.ui
 
 import android.content.ClipData
 import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.People
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
@@ -57,27 +59,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.armoredage.R
+import com.example.armoredage.OpenSourceLicensesActivity
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgeApp(context: Context) {
-    val vm: AgeViewModel = viewModel(factory = AgeViewModel.factory(context))
+fun AgeApp(appContext: Context) {
+    val vm: AgeViewModel = viewModel(factory = AgeViewModel.factory(appContext))
     val state by vm.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val clipboard = LocalClipboard.current
+    val uiContext = LocalContext.current
     val scope = rememberCoroutineScope()
     val resultCopiedNotice = stringResource(R.string.notice_result_copied)
     val publicKeyCopiedNotice = stringResource(R.string.notice_public_key_copied)
     val privateKeyCopiedNotice = stringResource(R.string.notice_private_key_copied)
     val clipboardEmptyNotice = stringResource(R.string.notice_clipboard_empty)
     val copyLabel = stringResource(R.string.action_copy)
+    val currentLanguage = AppLanguage.fromLanguageTags(AppCompatDelegate.getApplicationLocales().toLanguageTags())
+    val appVersion = remember(uiContext) {
+        runCatching {
+            @Suppress("DEPRECATION")
+            uiContext.packageManager.getPackageInfo(uiContext.packageName, 0).versionName
+        }.getOrNull().orEmpty()
+    }
 
     var deleteRecipientTarget by rememberSaveable { mutableStateOf<String?>(null) }
     var deleteIdentityTarget by rememberSaveable { mutableStateOf<String?>(null) }
@@ -104,7 +117,7 @@ fun AgeApp(context: Context) {
                 ?.clipData
                 ?.takeIf { it.itemCount > 0 }
                 ?.getItemAt(0)
-                ?.coerceToText(context)
+                ?.coerceToText(uiContext)
                 ?.toString()
                 ?.takeIf { it.isNotBlank() }
 
@@ -193,6 +206,20 @@ fun AgeApp(context: Context) {
                 },
                 onCopyPrivateKey = { privateKeyCopyTarget = it },
                 onDelete = { deleteIdentityTarget = it },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            )
+
+            TopLevelSection.SETTINGS -> SettingsSection(
+                selectedLanguage = currentLanguage,
+                onLanguageSelected = { language ->
+                    AppCompatDelegate.setApplicationLocales(language.toLocaleList())
+                },
+                onOpenOpenSourceLicenses = {
+                    uiContext.startActivity(Intent(uiContext, OpenSourceLicensesActivity::class.java))
+                },
+                appVersion = appVersion,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
@@ -658,6 +685,75 @@ private fun KeysSection(
 }
 
 @Composable
+private fun SettingsSection(
+    selectedLanguage: AppLanguage,
+    onLanguageSelected: (AppLanguage) -> Unit,
+    onOpenOpenSourceLicenses: () -> Unit,
+    appVersion: String,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            SectionHeader(
+                eyebrow = stringResource(R.string.settings_eyebrow),
+                title = stringResource(R.string.settings_title),
+                body = stringResource(R.string.settings_body)
+            )
+        }
+        item {
+            WorkflowCard(
+                title = stringResource(R.string.settings_language_title),
+                body = stringResource(R.string.settings_language_body)
+            ) {
+                AppLanguageDropdown(
+                    selectedLanguage = selectedLanguage,
+                    onSelected = onLanguageSelected
+                )
+            }
+        }
+        item {
+            WorkflowCard(
+                title = stringResource(R.string.settings_about_title),
+                body = stringResource(R.string.settings_about_body)
+            ) {
+                Text(
+                    text = stringResource(R.string.settings_about_version, appVersion),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = stringResource(R.string.settings_about_copyright),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = stringResource(R.string.settings_about_license_label),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = stringResource(R.string.settings_about_license_body),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        item {
+            WorkflowCard(
+                title = stringResource(R.string.settings_open_source_title),
+                body = stringResource(R.string.settings_open_source_body)
+            ) {
+                OutlinedButton(onClick = onOpenOpenSourceLicenses) {
+                    Text(stringResource(R.string.action_view_open_source_licenses))
+                }
+            }
+        }
+    }
+}
+
+@Composable
 private fun SectionHeader(eyebrow: String, title: String, body: String) {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(
@@ -775,6 +871,42 @@ private fun InlineActionCard(
             Text(body, color = MaterialTheme.colorScheme.onSurfaceVariant)
             OutlinedButton(onClick = onAction) {
                 Text(actionLabel)
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AppLanguageDropdown(
+    selectedLanguage: AppLanguage,
+    onSelected: (AppLanguage) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val labels = AppLanguage.entries.associateWith { stringResource(it.labelRes) }
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+        OutlinedTextField(
+            value = labels.getValue(selectedLanguage),
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(stringResource(R.string.label_app_language)) },
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            modifier = Modifier
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+                .fillMaxWidth()
+        )
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            AppLanguage.entries.forEach { language ->
+                DropdownMenuItem(
+                    text = { Text(labels.getValue(language)) },
+                    onClick = {
+                        onSelected(language)
+                        expanded = false
+                    }
+                )
             }
         }
     }
@@ -957,4 +1089,5 @@ private val TopLevelSection.icon
         TopLevelSection.MAIN -> Icons.Outlined.Home
         TopLevelSection.RECIPIENTS -> Icons.Outlined.People
         TopLevelSection.MY_KEYS -> Icons.Outlined.Key
+        TopLevelSection.SETTINGS -> Icons.Outlined.Settings
     }

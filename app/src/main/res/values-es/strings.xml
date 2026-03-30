@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArmoredAge</string>
+    <string name="app_tagline">Cifra, descifra y administra identidades AGE</string>
+
+    <string name="nav_main">Principal</string>
+    <string name="nav_recipients">Destinatarios</string>
+    <string name="nav_my_keys">Mis claves</string>
+    <string name="nav_settings">Ajustes</string>
+
+    <string name="main_eyebrow">Principal</string>
+    <string name="main_title">Codifica y decodifica cargas AGE con armadura</string>
+    <string name="main_body">Concéntrate en un flujo a la vez y mantén los resultados listos para copiar.</string>
+    <string name="main_mode_encrypt">Cifrar</string>
+    <string name="main_mode_decrypt">Descifrar</string>
+    <string name="main_encrypt_title">Cifrar</string>
+    <string name="main_encrypt_body">Elige un destinatario guardado y convierte texto plano en salida AGE con armadura.</string>
+    <string name="main_decrypt_title">Descifrar</string>
+    <string name="main_decrypt_body">Usa una de tus identidades guardadas para decodificar una carga AGE con armadura.</string>
+
+    <string name="label_recipient">Destinatario</string>
+    <string name="placeholder_select_recipient">Selecciona un destinatario</string>
+    <string name="label_identity">Identidad</string>
+    <string name="placeholder_select_identity">Selecciona una identidad</string>
+    <string name="label_plaintext">Texto plano</string>
+    <string name="label_armored_payload">Carga AGE con armadura</string>
+    <string name="label_name">Nombre</string>
+    <string name="label_recipient_alias">Alias del destinatario</string>
+    <string name="label_age_public_key">Clave pública AGE</string>
+    <string name="hint_age_public_key">Formato esperado: age1...</string>
+    <string name="label_private_key">Clave privada AGE</string>
+    <string name="label_app_language">Idioma de la aplicación</string>
+
+    <string name="language_system_default">Predeterminado del sistema</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_chinese_simplified">简体中文</string>
+
+    <string name="action_encrypt">Cifrar</string>
+    <string name="action_decrypt">Descifrar</string>
+    <string name="action_clear">Limpiar</string>
+    <string name="action_paste">Pegar</string>
+    <string name="action_paste_public_key">Pegar clave pública</string>
+    <string name="action_copy">Copiar</string>
+    <string name="action_copy_result">Copiar resultado</string>
+    <string name="action_copy_public">Copiar pública</string>
+    <string name="action_copy_private">Copiar privada</string>
+    <string name="action_save_recipient">Guardar destinatario</string>
+    <string name="action_generate_identity">Generar identidad</string>
+    <string name="action_import_private_key">Importar clave privada</string>
+    <string name="action_select">Seleccionar</string>
+    <string name="action_selected">Seleccionado</string>
+    <string name="action_rename">Renombrar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_delete_identity">Eliminar identidad</string>
+    <string name="action_open_recipients">Abrir Destinatarios</string>
+    <string name="action_open_my_keys">Abrir Mis claves</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_back">Atrás</string>
+    <string name="action_show_license">Mostrar licencia</string>
+    <string name="action_show_less">Mostrar menos</string>
+    <string name="action_view_open_source_licenses">Ver licencias de código abierto</string>
+
+    <string name="result_title">Resultado</string>
+    <string name="result_hint">Ejecuta una acción de cifrado o descifrado para ver la salida aquí.</string>
+    <string name="result_output_label">Salida</string>
+
+    <string name="recipients_eyebrow">Destinatarios</string>
+    <string name="recipients_title">Administra para quién cifras</string>
+    <string name="recipients_body">Guarda una vez claves de destinatarios confiables y selecciónalas al instante desde el flujo principal.</string>
+    <string name="recipients_add_title">Añadir destinatario</string>
+    <string name="recipients_add_body">Guarda un alias y una clave pública AGE para reutilizarlos.</string>
+    <string name="empty_recipients_title">Aún no hay destinatarios</string>
+    <string name="empty_recipients_body">Añade un destinatario para habilitar el cifrado.</string>
+
+    <string name="my_keys_eyebrow">Mis claves</string>
+    <string name="my_keys_title">Administra identidades locales</string>
+    <string name="my_keys_body">Genera identidades AGE almacenadas en el dispositivo, elige la activa y copia las claves cuando sea necesario.</string>
+    <string name="my_keys_create_title">Crear identidad</string>
+    <string name="my_keys_create_body">Genera una identidad X25519 nueva y guárdala de forma segura en el dispositivo.</string>
+    <string name="empty_identities_title">Aún no hay identidades</string>
+    <string name="empty_identities_body">Genera o importa una identidad para descifrar mensajes en este dispositivo.</string>
+
+    <string name="settings_eyebrow">Ajustes</string>
+    <string name="settings_title">Ajustes de la aplicación e información legal</string>
+    <string name="settings_body">Elige el idioma de la aplicación y revisa la licencia de la app y las licencias de terceros.</string>
+    <string name="settings_language_title">Idioma</string>
+    <string name="settings_language_body">Cambia el idioma de la aplicación sin modificar el idioma del dispositivo.</string>
+    <string name="settings_about_title">Acerca de</string>
+    <string name="settings_about_body">ArmoredAge es una utilidad AGE local para cifrado con armadura, descifrado y gestión de claves.</string>
+    <string name="settings_about_version">Versión %1$s</string>
+    <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
+    <string name="settings_about_license_label">Licencia MIT</string>
+    <string name="settings_about_license_body">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies.</string>
+    <string name="settings_open_source_title">Software de código abierto</string>
+    <string name="settings_open_source_body">Revisa las licencias de las bibliotecas de terceros incluidas en la aplicación.</string>
+    <string name="settings_open_source_menu_title">Licencias de código abierto</string>
+
+    <string name="dialog_delete_recipient_title">¿Eliminar destinatario?</string>
+    <string name="dialog_delete_recipient_body">¿Quitar "%1$s" de los destinatarios guardados?</string>
+    <string name="dialog_delete_identity_title">¿Eliminar identidad?</string>
+    <string name="dialog_delete_identity_body">¿Eliminar "%1$s" y sus claves guardadas de este dispositivo?</string>
+    <string name="dialog_copy_private_key_title">¿Copiar clave privada?</string>
+    <string name="dialog_copy_private_key_body">Las claves privadas permiten descifrar. ¿Copiar "%1$s" al portapapeles?</string>
+    <string name="dialog_rename_recipient_title">Renombrar destinatario</string>
+    <string name="dialog_rename_identity_title">Renombrar identidad</string>
+    <string name="dialog_import_private_key_title">Importar clave privada</string>
+
+    <string name="notice_result_copied">Resultado copiado</string>
+    <string name="notice_public_key_copied">Clave pública copiada</string>
+    <string name="notice_private_key_copied">Clave privada copiada</string>
+    <string name="notice_clipboard_empty">El portapapeles está vacío.</string>
+    <string name="notice_identity_generated">Se generó la identidad "%1$s".</string>
+    <string name="notice_recipient_saved">Se guardó el destinatario "%1$s".</string>
+    <string name="notice_recipient_deleted">Se eliminó el destinatario "%1$s".</string>
+    <string name="notice_recipient_renamed">Se renombró el destinatario "%1$s" a "%2$s".</string>
+    <string name="notice_identity_deleted">Se eliminó la identidad "%1$s".</string>
+    <string name="notice_identity_renamed">Se renombró la identidad "%1$s" a "%2$s".</string>
+    <string name="notice_identity_imported">Se importó la identidad "%1$s".</string>
+
+    <string name="error_unknown">Error desconocido</string>
+    <string name="error_recipient_name_required">El nombre del destinatario es obligatorio.</string>
+    <string name="error_recipient_duplicate">El alias del destinatario ya existe.</string>
+    <string name="error_identity_label_required">El nombre de la identidad es obligatorio.</string>
+    <string name="error_identity_duplicate">El nombre de la identidad ya existe.</string>
+    <string name="error_invalid_private_key">Clave privada AGE no válida.</string>
+    <string name="error_invalid_public_key">El destinatario debe ser una clave pública AGE válida.</string>
+    <string name="error_select_recipient">Selecciona un destinatario conocido para cifrar.</string>
+    <string name="error_identity_missing">No se encontró la identidad. Primero genera o importa una.</string>
+    <string name="error_invalid_armored_payload">Solo se permiten cargas AGE con armadura.</string>
+    <string name="main_no_recipients_title">El cifrado necesita un destinatario</string>
+    <string name="main_no_recipients_body">Añade primero un destinatario guardado y luego vuelve aquí para cifrar.</string>
+    <string name="main_no_identities_title">El descifrado necesita una de tus identidades</string>
+    <string name="main_no_identities_body">Genera o importa primero una identidad y luego vuelve aquí para descifrar.</string>
+</resources>

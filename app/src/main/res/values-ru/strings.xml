@@ -6,6 +6,7 @@
     <string name="nav_main">Главная</string>
     <string name="nav_recipients">Получатели</string>
     <string name="nav_my_keys">Мои ключи</string>
+    <string name="nav_settings">Настройки</string>
 
     <string name="main_eyebrow">Главная</string>
     <string name="main_title">Кодирование и декодирование армированных AGE-пакетов</string>
@@ -28,6 +29,13 @@
     <string name="label_age_public_key">AGE публичный ключ</string>
     <string name="hint_age_public_key">Ожидаемый формат: age1...</string>
     <string name="label_private_key">AGE приватный ключ</string>
+    <string name="label_app_language">Язык приложения</string>
+
+    <string name="language_system_default">Системный по умолчанию</string>
+    <string name="language_english">English</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_chinese_simplified">简体中文</string>
 
     <string name="action_encrypt">Зашифровать</string>
     <string name="action_decrypt">Расшифровать</string>
@@ -50,6 +58,10 @@
     <string name="action_open_my_keys">Открыть мои ключи</string>
     <string name="action_save">Сохранить</string>
     <string name="action_cancel">Отмена</string>
+    <string name="action_back">Назад</string>
+    <string name="action_show_license">Показать лицензию</string>
+    <string name="action_show_less">Свернуть</string>
+    <string name="action_view_open_source_licenses">Открыть лицензии Open Source</string>
 
     <string name="result_title">Результат</string>
     <string name="result_hint">Запустите шифрование или расшифровку, чтобы увидеть вывод здесь.</string>
@@ -70,6 +82,21 @@
     <string name="my_keys_create_body">Создайте новый X25519-ключ идентификации и сохраните его на устройстве в защищённом виде.</string>
     <string name="empty_identities_title">Пока нет ключей идентификации</string>
     <string name="empty_identities_body">Создайте или импортируйте ключ идентификации, чтобы расшифровывать сообщения на этом устройстве.</string>
+
+    <string name="settings_eyebrow">Настройки</string>
+    <string name="settings_title">Настройки приложения и правовая информация</string>
+    <string name="settings_body">Выберите язык приложения и просмотрите информацию о лицензии приложения и сторонних компонентов.</string>
+    <string name="settings_language_title">Язык</string>
+    <string name="settings_language_body">Переопределите язык приложения без изменения языка устройства.</string>
+    <string name="settings_about_title">О приложении</string>
+    <string name="settings_about_body">ArmoredAge — это локальный инструмент AGE для армированного шифрования, расшифровки и управления ключами.</string>
+    <string name="settings_about_version">Версия %1$s</string>
+    <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
+    <string name="settings_about_license_label">MIT License</string>
+    <string name="settings_about_license_body">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies.</string>
+    <string name="settings_open_source_title">Open Source ПО</string>
+    <string name="settings_open_source_body">Просмотрите лицензии сторонних библиотек, входящих в приложение.</string>
+    <string name="settings_open_source_menu_title">Лицензии Open Source</string>
 
     <string name="dialog_delete_recipient_title">Удалить получателя?</string>
     <string name="dialog_delete_recipient_body">Удалить "%1$s" из сохранённых получателей?</string>

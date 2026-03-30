@@ -16,13 +16,15 @@ import kotlinx.coroutines.flow.update
 enum class TopLevelSection {
     MAIN,
     RECIPIENTS,
-    MY_KEYS;
+    MY_KEYS,
+    SETTINGS;
 
     val labelRes: Int
         get() = when (this) {
             MAIN -> R.string.nav_main
             RECIPIENTS -> R.string.nav_recipients
             MY_KEYS -> R.string.nav_my_keys
+            SETTINGS -> R.string.nav_settings
         }
 }
 
