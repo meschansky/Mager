@@ -95,14 +95,14 @@ private fun OpenSourceLicensesScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            item {
+            item(key = "open-source-intro") {
                 Text(
                     text = androidx.compose.ui.res.stringResource(R.string.settings_open_source_body),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            itemsIndexed(notices, key = { index, _ -> index }) { index, notice ->
+            itemsIndexed(notices, key = { index, _ -> "license-$index" }) { index, notice ->
                 OpenSourceNoticeCard(
                     notice = notice,
                     stateKey = "notice-$index",
