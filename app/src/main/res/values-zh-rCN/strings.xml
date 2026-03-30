@@ -61,6 +61,7 @@
     <string name="action_back">返回</string>
     <string name="action_show_license">显示许可证</string>
     <string name="action_show_less">收起</string>
+    <string name="action_open_reference">打开参考链接</string>
     <string name="action_view_open_source_licenses">查看开源许可证</string>
 
     <string name="result_title">结果</string>
@@ -89,7 +90,7 @@
     <string name="settings_language_title">语言</string>
     <string name="settings_language_body">无需更改设备语言即可覆盖应用语言。</string>
     <string name="settings_about_title">关于</string>
-    <string name="settings_about_body">ArmoredAge 是一个本地优先的 AGE 工具，用于装甲加密、解密和密钥管理。</string>
+    <string name="settings_about_body">ArmoredAge 是一款完全自由且开源、以本地优先为原则的 AGE 工具，用于装甲加密、解密和密钥管理。它不包含任何跟踪器、广告或分析组件。</string>
     <string name="settings_about_version">版本 %1$s</string>
     <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
     <string name="settings_about_license_label">MIT License</string>

@@ -1,6 +1,8 @@
 package com.example.armoredage
 
+import android.content.Intent
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,7 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.CardDefaults
@@ -33,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -67,6 +70,7 @@ private fun OpenSourceLicensesScreen(
     notices: List<OpenSourceNotice>,
     onBack: () -> Unit
 ) {
+    val context = LocalContext.current
     val title = androidx.compose.ui.res.stringResource(R.string.settings_open_source_menu_title)
     val backLabel = androidx.compose.ui.res.stringResource(R.string.action_back)
     Scaffold(
@@ -98,16 +102,27 @@ private fun OpenSourceLicensesScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            items(notices, key = { "${it.title}:${it.body.hashCode()}" }) { notice ->
-                OpenSourceNoticeCard(notice = notice)
+            itemsIndexed(notices, key = { index, _ -> index }) { index, notice ->
+                OpenSourceNoticeCard(
+                    notice = notice,
+                    stateKey = "notice-$index",
+                    onOpenReference = { url ->
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun OpenSourceNoticeCard(notice: OpenSourceNotice) {
-    var expanded by rememberSaveable(notice.title) { mutableStateOf(false) }
+private fun OpenSourceNoticeCard(
+    notice: OpenSourceNotice,
+    stateKey: String,
+    onOpenReference: (String) -> Unit
+) {
+    val isReferenceUrl = notice.body.startsWith("http://") || notice.body.startsWith("https://")
+    var expanded by rememberSaveable(stateKey) { mutableStateOf(false) }
     ElevatedCard(
         colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
@@ -129,14 +144,20 @@ private fun OpenSourceNoticeCard(notice: OpenSourceNotice) {
                 maxLines = if (expanded) Int.MAX_VALUE else 4,
                 overflow = TextOverflow.Ellipsis
             )
-            TextButton(onClick = { expanded = !expanded }) {
-                Text(
-                    if (expanded) {
-                        androidx.compose.ui.res.stringResource(R.string.action_show_less)
-                    } else {
-                        androidx.compose.ui.res.stringResource(R.string.action_show_license)
-                    }
-                )
+            if (isReferenceUrl) {
+                TextButton(onClick = { onOpenReference(notice.body) }) {
+                    Text(androidx.compose.ui.res.stringResource(R.string.action_open_reference))
+                }
+            } else {
+                TextButton(onClick = { expanded = !expanded }) {
+                    Text(
+                        if (expanded) {
+                            androidx.compose.ui.res.stringResource(R.string.action_show_less)
+                        } else {
+                            androidx.compose.ui.res.stringResource(R.string.action_show_license)
+                        }
+                    )
+                }
             }
         }
     }
@@ -163,5 +184,6 @@ private fun loadOpenSourceNotices(context: Context): List<OpenSourceNotice> {
         val body = licenseBytes.copyOfRange(offset, offset + length).toString(Charsets.UTF_8).trim()
 
         OpenSourceNotice(title = title, body = body)
-    }
+    }.distinctBy { it.title to it.body }
+        .sortedBy { it.title.lowercase() }
 }

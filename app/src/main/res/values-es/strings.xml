@@ -61,6 +61,7 @@
     <string name="action_back">Atrás</string>
     <string name="action_show_license">Mostrar licencia</string>
     <string name="action_show_less">Mostrar menos</string>
+    <string name="action_open_reference">Abrir referencia</string>
     <string name="action_view_open_source_licenses">Ver licencias de código abierto</string>
 
     <string name="result_title">Resultado</string>
@@ -89,7 +90,7 @@
     <string name="settings_language_title">Idioma</string>
     <string name="settings_language_body">Cambia el idioma de la aplicación sin modificar el idioma del dispositivo.</string>
     <string name="settings_about_title">Acerca de</string>
-    <string name="settings_about_body">ArmoredAge es una utilidad AGE local para cifrado con armadura, descifrado y gestión de claves.</string>
+    <string name="settings_about_body">ArmoredAge es una utilidad AGE totalmente libre y de código abierto, local y diseñada para cifrado con armadura, descifrado y gestión de claves. No incluye rastreadores, anuncios ni analítica.</string>
     <string name="settings_about_version">Versión %1$s</string>
     <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
     <string name="settings_about_license_label">Licencia MIT</string>

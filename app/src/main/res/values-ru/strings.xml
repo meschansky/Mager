@@ -61,6 +61,7 @@
     <string name="action_back">Назад</string>
     <string name="action_show_license">Показать лицензию</string>
     <string name="action_show_less">Свернуть</string>
+    <string name="action_open_reference">Открыть ссылку</string>
     <string name="action_view_open_source_licenses">Открыть лицензии Open Source</string>
 
     <string name="result_title">Результат</string>
@@ -89,7 +90,7 @@
     <string name="settings_language_title">Язык</string>
     <string name="settings_language_body">Переопределите язык приложения без изменения языка устройства.</string>
     <string name="settings_about_title">О приложении</string>
-    <string name="settings_about_body">ArmoredAge — это локальный инструмент AGE для армированного шифрования, расшифровки и управления ключами.</string>
+    <string name="settings_about_body">ArmoredAge — это полностью свободное приложение с открытым исходным кодом, работающее локально и предназначенное для армированного AGE-шифрования, расшифровки и управления ключами. В нём нет трекеров, рекламы и аналитики.</string>
     <string name="settings_about_version">Версия %1$s</string>
     <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
     <string name="settings_about_license_label">MIT License</string>

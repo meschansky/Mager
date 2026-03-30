@@ -61,6 +61,7 @@
     <string name="action_back">Back</string>
     <string name="action_show_license">Show license</string>
     <string name="action_show_less">Show less</string>
+    <string name="action_open_reference">Open reference</string>
     <string name="action_view_open_source_licenses">View open source licenses</string>
 
     <string name="result_title">Result</string>
@@ -89,7 +90,7 @@
     <string name="settings_language_title">Language</string>
     <string name="settings_language_body">Override the app language without changing your device language.</string>
     <string name="settings_about_title">About</string>
-    <string name="settings_about_body">ArmoredAge is a local-first AGE utility for armored encryption, decryption, and key management.</string>
+    <string name="settings_about_body">ArmoredAge is a fully free and open-source, local-first AGE utility for armored encryption, decryption, and key management. It includes no trackers, ads, or analytics.</string>
     <string name="settings_about_version">Version %1$s</string>
     <string name="settings_about_copyright">Copyright © 2026 Michael Meschansky</string>
     <string name="settings_about_license_label">MIT License</string>

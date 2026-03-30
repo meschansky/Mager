@@ -397,17 +397,25 @@ private fun MainSection(
                         minLines = 6,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = onEncrypt,
-                            enabled = state.selectedRecipient.isNotBlank() && state.plaintext.isNotBlank()
+                            enabled = state.selectedRecipient.isNotBlank() && state.plaintext.isNotBlank(),
+                            modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(stringResource(R.string.action_encrypt))
                         }
-                        OutlinedButton(onClick = onPastePlaintext) {
+                        OutlinedButton(
+                            onClick = onPastePlaintext,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
                             Text(stringResource(R.string.action_paste))
                         }
-                        OutlinedButton(onClick = onClearPlaintext, enabled = state.plaintext.isNotBlank()) {
+                        OutlinedButton(
+                            onClick = onClearPlaintext,
+                            enabled = state.plaintext.isNotBlank(),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
                             Text(stringResource(R.string.action_clear))
                         }
                     }
@@ -440,17 +448,25 @@ private fun MainSection(
                         minLines = 8,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(
                             onClick = onDecrypt,
-                            enabled = state.selectedIdentity.isNotBlank() && state.ciphertext.isNotBlank()
+                            enabled = state.selectedIdentity.isNotBlank() && state.ciphertext.isNotBlank(),
+                            modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(stringResource(R.string.action_decrypt))
                         }
-                        OutlinedButton(onClick = onPasteCiphertext) {
+                        OutlinedButton(
+                            onClick = onPasteCiphertext,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
                             Text(stringResource(R.string.action_paste))
                         }
-                        OutlinedButton(onClick = onClearCiphertext, enabled = state.ciphertext.isNotBlank()) {
+                        OutlinedButton(
+                            onClick = onClearCiphertext,
+                            enabled = state.ciphertext.isNotBlank(),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
                             Text(stringResource(R.string.action_clear))
                         }
                     }
@@ -510,16 +526,20 @@ private fun RecipientsSection(
                     minLines = 3,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Row(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    OutlinedButton(onClick = onPastePubkey) {
+                    OutlinedButton(
+                        onClick = onPastePubkey,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Text(stringResource(R.string.action_paste_public_key))
                     }
                     Button(
                         onClick = onSave,
-                        enabled = state.recipientNameInput.isNotBlank() && state.recipientPubkeyInput.isNotBlank()
+                        enabled = state.recipientNameInput.isNotBlank() && state.recipientPubkeyInput.isNotBlank(),
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(stringResource(R.string.action_save_recipient))
                     }
@@ -595,11 +615,17 @@ private fun KeysSection(
                 title = stringResource(R.string.my_keys_create_title),
                 body = stringResource(R.string.my_keys_create_body)
             ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Button(onClick = onGenerate) {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = onGenerate,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Text(stringResource(R.string.action_generate_identity))
                     }
-                    OutlinedButton(onClick = onImport) {
+                    OutlinedButton(
+                        onClick = onImport,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Text(stringResource(R.string.action_import_private_key))
                     }
                 }
@@ -648,20 +674,27 @@ private fun KeysSection(
                                 }
                             }
                         }
-                        Row(
+                        Column(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             OutlinedButton(
                                 onClick = { onSelect(label) },
-                                enabled = state.selectedIdentity != label
+                                enabled = state.selectedIdentity != label,
+                                modifier = Modifier.fillMaxWidth()
                             ) {
                                 Text(stringResource(R.string.action_select))
                             }
-                            OutlinedButton(onClick = { onRename(label) }) {
+                            OutlinedButton(
+                                onClick = { onRename(label) },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
                                 Text(stringResource(R.string.action_rename))
                             }
-                            TextButton(onClick = { onDelete(label) }) {
+                            TextButton(
+                                onClick = { onDelete(label) },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
                                 Text(stringResource(R.string.action_delete))
                             }
                         }
@@ -820,11 +853,18 @@ private fun ResultCard(
                     label = { Text(stringResource(R.string.result_output_label)) }
                 )
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = onCopy, enabled = result.isNotBlank()) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = onCopy,
+                    enabled = result.isNotBlank(),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text(stringResource(R.string.action_copy_result))
                 }
-                OutlinedButton(onClick = onClear) {
+                OutlinedButton(
+                    onClick = onClear,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text(stringResource(R.string.action_clear))
                 }
             }
